@@ -1,6 +1,6 @@
 @file:DependsOn(
-"G:\\AST\\kts4mc-template-1.21.11\\run\\saves\\新的世界\\datapacks\\lib\\26.1-snapshot-6-Fabric.jar",
-"G:\\AST\\kts4mc-template-1.21.11\\build\\libs\\katton-1.0.0.jar"
+"lib\\26.1-snapshot-6-Fabric.jar",
+"libs\\katton-1.0.0.jar"
 )
 
 import net.minecraft.core.component.DataComponents
