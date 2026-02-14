@@ -10,12 +10,9 @@ import net.minecraft.world.level.Level
 import top.katton.api.KattonEvents.ServerEntity.EntityLoadArg
 import top.katton.api.KattonEvents.ServerEntity.onEntityLoad
 import top.katton.api.KattonEvents.ServerTick.onStartServerTick
-import top.katton.api.KattonMC.KattonItemCollection.Weapon
-import top.katton.api.KattonMC.get
-import top.katton.api.KattonMC.invoke
-import top.katton.api.KattonMC.nbt
-import top.katton.api.KattonMC.plus
 import top.katton.api.getEntityNbt
+import top.katton.api.invoke
+import top.katton.api.nbt
 import top.katton.api.tell
 
 fun main() {
