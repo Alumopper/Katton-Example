@@ -1,19 +1,14 @@
-@file:DependsOn(
-    "lib\\26.1-snapshot-6-Fabric.jar",
-    "libs\\katton-1.0.0.jar"
-)
-
 import net.minecraft.network.chat.Component
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.projectile.arrow.Arrow
 import net.minecraft.world.level.Level
+import test.say
+import top.katton.api.*
 import top.katton.api.KattonEvents.ServerEntity.EntityLoadArg
 import top.katton.api.KattonEvents.ServerEntity.onEntityLoad
 import top.katton.api.KattonEvents.ServerTick.onStartServerTick
-import top.katton.api.getEntityNbt
-import top.katton.api.invoke
-import top.katton.api.nbt
-import top.katton.api.tell
+import top.katton.api.KattonItemCollection.Weapon
 
 fun main() {
     onEntityLoad += load@
@@ -24,7 +19,7 @@ fun main() {
         val owner = entity.owner
         if (owner is ServerPlayer) {
             onArrowShot(owner, entity)
-            tell(owner, "你射出了一个箭头")
+            say(owner)
         }
     }
 
@@ -61,6 +56,7 @@ fun processTNTArrow() {
                 Level.ExplosionInteraction.TNT
             )
             iterator.remove()
+            arrow.kill(arrow.level() as ServerLevel)
         }
     }
 }
