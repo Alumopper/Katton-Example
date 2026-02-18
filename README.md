@@ -29,8 +29,5 @@ While this project uses Gradle for structure, **Kotlin script dependencies are n
 
 You can add other mod jars to `libs` and declare them in your script to access their APIs. Just remember to keep these jars updated alongside your game and mods.
 
-:::tip
-Some mods (like **fabric-api**) distribute multiple jars nested inside a single file. IDEs cannot read jars within jars. **You must extract these inner jar files** and place them individually into the `libs` folder.
-:::
-
-> **Note:** The `@file:DependsOn` annotations are **only for your IDE**. When the game runs, Katton automatically adds all loaded game classes to the script engine's classpath. Dependencies declared in your scripts are ignored by the runtime. While you *could* skip this setup, your IDE would show errors (red squiggly lines) and fail to provide code hints.
+> [!TIP]
+> Some mods (like **fabric-api**) distribute multiple jars nested inside a single file. IDEs cannot read jars within jars. **You must extract these inner jar files** and place them individually into the `libs` folder.
