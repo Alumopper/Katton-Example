@@ -4,6 +4,7 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.projectile.arrow.Arrow
 import net.minecraft.world.level.Level
 import test.say
+import test.say2
 import top.katton.api.*
 import top.katton.api.KattonEvents.ServerEntity.EntityLoadArg
 import top.katton.api.KattonEvents.ServerEntity.onEntityLoad
@@ -20,6 +21,7 @@ fun main() {
         if (owner is ServerPlayer) {
             onArrowShot(owner, entity)
             say(owner)
+            say2(owner)
         }
     }
 
@@ -61,4 +63,4 @@ fun processTNTArrow() {
     }
 }
 
-val runMain = main()
+@Suppress("unused") val entryPoint = main()

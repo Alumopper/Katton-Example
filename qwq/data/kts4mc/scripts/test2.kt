@@ -6,10 +6,10 @@ import top.katton.api.requireServer
 import top.katton.api.setThunder
 import top.katton.api.tell
 
-fun say(player: ServerPlayer) {
-    sayMeow(player)
+fun say2(player: ServerPlayer) {
+    sayMeow2(player)
 }
 
-fun sayMeow2(player: ServerPlayer) {
+fun sayMeow(player: ServerPlayer) {
     tell(player, "meow~")
 }
