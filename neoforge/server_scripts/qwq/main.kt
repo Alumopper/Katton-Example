@@ -1,3 +1,5 @@
+package qwq
+
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.Identifier
 import net.minecraft.server.level.ServerLevel
@@ -13,26 +15,24 @@ import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
-import onArrowShot
-import test.say
-import test.say2
-import top.katton.api.dpcaller.KattonItemCollection
+import top.katton.api.ServerScriptEntrypoint
+import top.katton.api.datapack.blockTags
+import top.katton.api.datapack.itemTags
+import top.katton.api.datapack.recipes
+import top.katton.api.datapack.tagRef
+import top.katton.api.dpcaller.*
 import top.katton.api.dpcaller.get
-import top.katton.api.dpcaller.getEntityNbt
 import top.katton.api.dpcaller.invoke
-import top.katton.api.dpcaller.nbt
-import top.katton.api.dpcaller.tell
-import top.katton.api.event.ChunkAndBlockEvent
 import top.katton.api.event.EntityLoadArg
 import top.katton.api.event.ServerEntityEvent
 import top.katton.api.event.ServerEvent.onStartServerTick
-import top.katton.api.event.ServerLivingEntityEvent
 import top.katton.api.plus
 import top.katton.api.registry.registerNativeBlock
 import top.katton.api.registry.registerNativeEffect
 import top.katton.api.registry.registerNativeItem
 import top.katton.registry.RegisterMode
 
+@ServerScriptEntrypoint
 fun main() {
     // 示例：动态注册一个可热重载的方块
     registerNativeBlock(
@@ -45,7 +45,6 @@ fun main() {
                 .requiresCorrectToolForDrops()
         )
     }
-
 
     // 示例：动态注册一个可热重载的状态效果
     registerNativeEffect(
@@ -72,8 +71,6 @@ fun main() {
         val owner = entity.owner
         if (owner is ServerPlayer) {
             onArrowShot(owner, entity)
-            say(owner)
-            say2(owner)
         }
     }
 
@@ -97,22 +94,11 @@ fun main() {
         object : Item(it) {
             override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResult {
                 (player as? ServerPlayer)?.let { p -> tell(p , "Used the hello item!") }
-                return InteractionResult.SUCCESS
+                // Do not consume the click so block interactions can still run.
+                return InteractionResult.PASS
             }
         }
     }
-
-
-//    onPlayerJoin += started@
-//    fun(arg: PlayerArg) {
-//        tell(arg.player, Component.literal("Give you a hello world!"))
-//        // 获取物品
-//        ITEMS[id("qwq:custom_item")]?.let {
-//            giveItem(arg.player, it.getDefaultInstance())
-//        }
-//    }
-
-
 }
 
 val tntArrow = HashSet<Arrow>()
@@ -131,19 +117,20 @@ fun processTNTArrow() {
         val arrow = iterator.next()
 
         if (getEntityNbt(arrow).getBooleanOr("inGround", false)) {
-            arrow.level().explode(
-                arrow,
-                arrow.damageSources().explosion(arrow, arrow.owner),
-                null,
-                arrow.position(),
-                1.0f,
-                false,
-                Level.ExplosionInteraction.TNT
-            )
+
+            summon(arrow.level() as ServerLevel, "creeper", arrow.position())
+//
+//            arrow.level().explode(
+//                arrow,
+//                arrow.damageSources().explosion(arrow, arrow.owner),
+//                null,
+//                arrow.position(),
+//                16.0f,
+//                false,
+//                Level.ExplosionInteraction.TNT
+//            )
             iterator.remove()
             arrow.kill(arrow.level() as ServerLevel)
         }
     }
 }
-
-@Suppress("unused") private val main = main()
