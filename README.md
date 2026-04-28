@@ -1,6 +1,6 @@
 # Katton Example Project
 
-This is an example project for [Katton](https://github.com/Alumopper/Katton), a Minecraft Fabric mod that brings Kotlin scripting support to datapacks. It serves as a comprehensive template to help you start creating your own Katton-based datapacks, demonstrating the essential file structure and setup.
+This is an example project for [Katton](https://github.com/Alumopper/Katton), a Minecraft Fabric mod that brings Kotlin scripting support to script packs. It serves as a comprehensive template to help you start creating your own Katton-based script packs, demonstrating the essential file structure and setup.
 
 ## Example Script
 
