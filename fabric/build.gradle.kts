@@ -15,7 +15,7 @@ plugins {
 	id("org.jetbrains.kotlin.jvm") version "2.3.0"
 }
 
-val kattonVersion = "0.2.0b2"
+val kattonVersion = "0.2.0b3"
 val fabricApiVersion = "0.144.0+26.1"
 //val clientScriptsTargetDir = file("G:\\AST\\kts4mc-template-1.21.11\\fabric\\run\\resourcepacks\\example\\assets\\test\\client_scripts")
 //val serverScriptsTargetDir = file("G:\\AST\\kts4mc-template-1.21.11\\fabric\\run\\saves\\新的世界\\datapacks\\qwq\\data\\test\\scripts")
