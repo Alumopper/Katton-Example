@@ -1,0 +1,8 @@
+{
+    "id": "test",
+    "name": "Test Pack",
+    "version": "1.0.0",
+    "description": "Comprehensive test for Katton APIs",
+    "authors": ["Katton Dev"],
+    "enabled": true
+}
