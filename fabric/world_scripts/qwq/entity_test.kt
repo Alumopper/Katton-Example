@@ -1,6 +1,6 @@
 package qwq
 
-import model.Zombie1Animation
+import model.Zombie1ModelAnimation
 import model.Zombie1Model
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
@@ -9,6 +9,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.entity.monster.Monster
 import net.minecraft.world.level.Level
+import qwq.Zombie1Entity
 import top.katton.api.ClientScriptEntrypoint
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.registry.registerAnimatedEntityRenderer
@@ -67,8 +68,8 @@ fun initZombieRenderer() {
         modelFactory = { root -> Zombie1Model(root) },
         texture = id("test", "textures/entity/zombie1.png"),
         animations = mapOf(
-            "idle" to Zombie1Animation.idle,
-            "walk" to Zombie1Animation.walkforward
+            "idle" to Zombie1ModelAnimation.idle,
+            "walk" to Zombie1ModelAnimation.walkforward
         )
     )
 }
