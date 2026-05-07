@@ -1,4 +1,4 @@
-package qwq.qwq
+package qwq
 
 import net.minecraft.client.gui.components.toasts.SystemToast
 import top.katton.api.*

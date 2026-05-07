@@ -5,11 +5,11 @@ plugins {
 	id("org.jetbrains.kotlin.jvm") version "2.3.0"
 }
 
-val kattonVersion = "0.1.3b1"
-val clientScriptsTargetDir: File? = null
-val serverScriptsTargetDir: File? = null
-val gClientScriptsTargetDir: File? = null
-val gServerScriptsTargetDir: File? = null
+val kattonVersion = "0.2.0b5"
+val worldScriptsTargetDir: List<File> = listOf(
+	file("G:\\AST\\kts4mc-template-1.21.11\\neoforge\\run\\saves\\New World\\kattonpacks\\test")
+)
+val globalScriptsTargetDir: List<File> = listOf()
 
 repositories {
 	mavenLocal()
@@ -26,14 +26,14 @@ dependencies {
 		include("*.jar")
 	})
 	compileOnly("com.mojang:brigadier:1.3.10")
+	compileOnly("org.joml:joml:1.10.8")
 }
 
-sourceSets {
-	kotlin {
-		main {
-			kotlin.srcDir("client_scripts")
-				.srcDir("server_scripts")
-		}
+
+kotlin {
+	jvmToolchain(25)
+	sourceSets.named("main") {
+		kotlin.srcDirs("global_scripts", "world_scripts")
 	}
 }
 
@@ -54,6 +54,7 @@ fun syncDirectoryAsHardLinks(sourceDir: File, targetDir: File) {
 	Files.walk(sourceRoot).use { stream ->
 		stream.forEach { sourcePath ->
 			if (sourcePath == sourceRoot) return@forEach
+
 			val relativePath = sourceRoot.relativize(sourcePath)
 			val targetPath = targetRoot.resolve(relativePath.toString())
 
@@ -73,15 +74,21 @@ fun syncDirectoryAsHardLinks(sourceDir: File, targetDir: File) {
 
 	fun pruneStaleEntries(targetPath: Path) {
 		if (!Files.exists(targetPath)) return
+
 		Files.list(targetPath).use { stream ->
 			stream.forEach { child ->
 				val relativePath = targetRoot.relativize(child)
 				val sourcePath = sourceRoot.resolve(relativePath.toString())
+
 				if (!Files.exists(sourcePath)) {
-					if (Files.isDirectory(child)) child.toFile().deleteRecursively()
-					else Files.deleteIfExists(child)
+					if (Files.isDirectory(child)) {
+						child.toFile().deleteRecursively()
+					} else {
+						Files.deleteIfExists(child)
+					}
 					return@forEach
 				}
+
 				if (Files.isDirectory(child)) {
 					pruneStaleEntries(child)
 					if (Files.list(child).use { it.findAny().isEmpty } && !Files.isDirectory(sourcePath)) {
@@ -95,23 +102,24 @@ fun syncDirectoryAsHardLinks(sourceDir: File, targetDir: File) {
 	pruneStaleEntries(targetRoot)
 }
 
-tasks.register("copyGlobalClientScripts") {
+tasks.register("copyWorldScripts") {
 	group = "distribution"
-	doLast { gClientScriptsTargetDir?.let { syncDirectoryAsHardLinks(file("global_client_scripts"), it) } }
+	description = "Mirrors world_scripts to the configured target path using hard links."
+	doLast {
+		worldScriptsTargetDir.forEach{ syncDirectoryAsHardLinks(file("world_scripts"), it)}
+	}
 }
-tasks.register("copyGlobalServerScripts") {
+
+tasks.register("copyGlobalScripts") {
 	group = "distribution"
-	doLast { gServerScriptsTargetDir?.let { syncDirectoryAsHardLinks(file("global_server_scripts"), it) } }
+	description = "Mirrors global_scripts to the configured target path using hard links."
+	doLast {
+		globalScriptsTargetDir.forEach{ syncDirectoryAsHardLinks(file("global_scripts"), it) }
+	}
 }
-tasks.register("copyClientScripts") {
-	group = "distribution"
-	doLast { clientScriptsTargetDir?.let { syncDirectoryAsHardLinks(file("client_scripts"), it) } }
-}
-tasks.register("copyServerScripts") {
-	group = "distribution"
-	doLast { serverScriptsTargetDir?.let { syncDirectoryAsHardLinks(file("server_scripts"), it) } }
-}
+
 tasks.register("copyGameScripts") {
 	group = "distribution"
-	dependsOn("copyClientScripts", "copyServerScripts", "copyGlobalClientScripts", "copyGlobalServerScripts")
+	description = "Mirrors world_scripts and global_scripts contents to their configured target paths."
+	dependsOn("copyWorldScripts", "copyGlobalScripts")
 }

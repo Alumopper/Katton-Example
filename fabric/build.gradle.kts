@@ -5,12 +5,13 @@ plugins {
 	id("org.jetbrains.kotlin.jvm") version "2.3.0"
 }
 
-val kattonVersion = "0.2.0b3"
+val kattonVersion = "0.2.0b5"
 val fabricApiVersion = "0.144.0+26.1"
-//val clientScriptsTargetDir = file("G:\\AST\\kts4mc-template-1.21.11\\fabric\\run\\resourcepacks\\example\\assets\\test\\client_scripts")
-//val serverScriptsTargetDir = file("G:\\AST\\kts4mc-template-1.21.11\\fabric\\run\\saves\\新的世界\\datapacks\\qwq\\data\\test\\scripts")
-val worldScriptsTargetDir: File? = file("G:\\AST\\kts4mc-template-1.21.11\\fabric\\run\\saves\\新的世界\\kattonpacks\\test")
-val globalScriptsTargetDir: File? = null
+val worldScriptsTargetDir: List<File> = listOf(
+	file("G:\\AST\\kts4mc-template-1.21.11\\fabric\\run\\saves\\新的世界\\kattonpacks\\test"),
+	file("G:\\AST\\kts4mc-template-1.21.11\\fabric\\run\\world\\kattonpacks\\test")
+)
+val globalScriptsTargetDir: List<File> = listOf()
 
 repositories {
 	mavenLocal()
@@ -112,7 +113,7 @@ tasks.register("copyWorldScripts") {
 	group = "distribution"
 	description = "Mirrors world_scripts to the configured target path using hard links."
 	doLast {
-		worldScriptsTargetDir?.let{ syncDirectoryAsHardLinks(file("world_scripts"), it)}
+		worldScriptsTargetDir.forEach{ syncDirectoryAsHardLinks(file("world_scripts"), it)}
 	}
 }
 
@@ -120,7 +121,7 @@ tasks.register("copyGlobalScripts") {
 	group = "distribution"
 	description = "Mirrors global_scripts to the configured target path using hard links."
 	doLast {
-		globalScriptsTargetDir?.let{ syncDirectoryAsHardLinks(file("global_scripts"), it) }
+		globalScriptsTargetDir.forEach{ syncDirectoryAsHardLinks(file("global_scripts"), it) }
 	}
 }
 
