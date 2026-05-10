@@ -5,9 +5,10 @@ plugins {
 	id("org.jetbrains.kotlin.jvm") version "2.3.0"
 }
 
-val kattonVersion = "0.2.0b5"
+val kattonVersion = "0.2.0"
 val worldScriptsTargetDir: List<File> = listOf(
-	file("G:\\AST\\kts4mc-template-1.21.11\\neoforge\\run\\saves\\New World\\kattonpacks\\test")
+	file("G:\\AST\\kts4mc-template-1.21.11\\neoforge\\run\\saves\\New World\\kattonpacks\\test"),
+	file("G:\\AST\\kts4mc-template-1.21.11\\neoforge\\run\\world\\kattonpacks\\test")
 )
 val globalScriptsTargetDir: List<File> = listOf()
 
