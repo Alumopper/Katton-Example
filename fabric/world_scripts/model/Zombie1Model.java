@@ -16,7 +16,7 @@ import top.katton.registry.KattonRegistryKt;
 @SuppressWarnings("FieldCanBeLocal")
 public class Zombie1Model<T extends EntityRenderState> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(KattonRegistryKt.id("modid", "zombie1model"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(KattonRegistryKt.id("modid", "zombie1model"), ".main");
 	private final ModelPart root;
 	private final ModelPart body;
 	private final ModelPart rightarm;

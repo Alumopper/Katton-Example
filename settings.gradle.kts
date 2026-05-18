@@ -7,4 +7,4 @@ pluginManagement {
 
 rootProject.name = "katton-examples"
 
-include("fabric", "neoforge")
+include("fabric", "neoforge", "paper")
