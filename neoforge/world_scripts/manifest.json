@@ -1,8 +1,1 @@
-{
-    "id": "test",
-    "name": "Test Pack",
-    "version": "1.0.0",
-    "description": "Comprehensive test for Katton APIs",
-    "authors": ["Katton Dev"],
-    "enabled": true
-}
+{"id":"test","name":"Test Pack","version":"1.0.0","description":"Comprehensive test for Katton APIs","authors":["Katton Dev"],"enabled":true,"signature":{"algorithm":"Ed25519","keyId":"neoforge-example","publicKey":"MCowBQYDK2VwAyEAdbs54rpiGuhmCBC7Wdxj0UJQfVEYGqzvYyF/+BzLqew=","signature":"D12VoFSQU7OOEvF0Xvc+Sw3QqbzUD1ttaFvykY2IK+zFi1eb7Wlk8HXNIqmKND+zqxkgt7RH2R/erQatdG68DQ=="}}

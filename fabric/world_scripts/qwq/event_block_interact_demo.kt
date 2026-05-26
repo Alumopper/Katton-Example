@@ -10,10 +10,10 @@ import top.katton.api.event.UseItemOnArg
 
 @ServerScriptEntrypoint
 fun eventBlockInteractDemo() {
-    PlayerEvent.onUseItemOn += onUse@ fun(arg: UseItemOnArg): InteractionResult {
-        if (arg.world.isClientSide) return InteractionResult.PASS
+    PlayerEvent.onUseItemOn += onUse@ fun(arg: UseItemOnArg): InteractionResult? {
+        if (arg.world.isClientSide) return null
 
-        val serverPlayer = arg.player as? ServerPlayer ?: return InteractionResult.PASS
+        val serverPlayer = arg.player as? ServerPlayer ?: return null
         val state = arg.world.getBlockState(arg.hitResult.blockPos)
 
         if (state.`is`(Blocks.DIAMOND_BLOCK)) {
@@ -21,7 +21,7 @@ fun eventBlockInteractDemo() {
             return InteractionResult.SUCCESS
         }
 
-        return InteractionResult.PASS
+        return null
     }
 }
 

@@ -17,13 +17,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import top.katton.api.ClientScriptEntrypoint
 import top.katton.api.ServerScriptEntrypoint
-import top.katton.api.datapack.blockTags
-import top.katton.api.datapack.itemTags
-import top.katton.api.datapack.recipes
-import top.katton.api.datapack.tagRef
 import top.katton.api.dpcaller.*
-import top.katton.api.dpcaller.get
-import top.katton.api.dpcaller.invoke
 import top.katton.api.event.EntityLoadArg
 import top.katton.api.event.ServerEntityEvent
 import top.katton.api.event.ServerEvent.onStartServerTick

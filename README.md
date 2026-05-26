@@ -30,3 +30,29 @@ You can add other mod jars to `libs` and declare them in your script to access t
 
 > [!TIP]
 > Some mods (like **fabric-api**) distribute multiple jars nested inside a single file. IDEs cannot read jars within jars. **You must extract these inner jar files** and place them individually into the `libs` folder.
+
+## Signing Client-Synced Packs
+
+Katton supports signing script packs that are downloaded by clients. Signing is optional for local development, but recommended for multiplayer packs with `"clientSync": true`.
+
+Generate a signing key once:
+
+```powershell
+.\gradlew.bat :fabric:generateKattonSigningKey "-PkattonPrivateKey=build\katton-signing-key.pem" "-PkattonPublicKey=build\katton-signing-key.pub"
+```
+
+Sign the pack after editing scripts:
+
+```powershell
+.\gradlew.bat :fabric:signKattonPack "-PkattonPackDir=world_scripts" "-PkattonPrivateKey=build\katton-signing-key.pem" "-PkattonPublicKey=build\katton-signing-key.pub" "-PkattonScope=world" "-PkattonKeyId=my-server-key"
+```
+
+Or sign and distribute in one step:
+
+```powershell
+.\gradlew.bat :fabric:signAndCopyWorldScripts
+```
+
+`signAndCopyWorldScripts` signs `world_scripts/manifest.json` first, then mirrors the signed pack to the configured target path. Use `signAndCopyGameScripts` when you want to sign world scripts and then run the full world/global copy flow.
+
+The task updates `manifest.json` with a `signature` block. Clients verify signed packs before caching or running them. Keep the private key secret and do not commit it.

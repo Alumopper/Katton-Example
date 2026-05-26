@@ -1,7 +1,6 @@
 package qwq
 
 import net.minecraft.network.chat.Component
-import net.minecraft.resources.Identifier
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
@@ -32,6 +31,7 @@ import top.katton.api.registry.registerNativeBlock
 import top.katton.api.registry.registerNativeEffect
 import top.katton.api.registry.registerNativeItem
 import top.katton.registry.RegisterMode
+import top.katton.registry.id
 
 @ServerScriptEntrypoint
 @ClientScriptEntrypoint
@@ -48,7 +48,7 @@ fun main() {
         )
     }
 
-    // 示例：动态注册一个可热重载的状态效果
+    // 示例：动态注册一个可热重载的状态效�?
     registerNativeEffect(
         id = "qwq:test_qwq",
         registerMode = RegisterMode.RELOADABLE
@@ -60,7 +60,7 @@ fun main() {
             }
 
             override fun shouldApplyEffectTickThisTick(tickCount: Int, amplification: Int): Boolean {
-                return tickCount % 20 == 0 // 每秒造成一次伤害
+                return tickCount % 20 == 0 // 每秒造成一次伤�?
             }
         }
     }
@@ -81,18 +81,18 @@ fun main() {
         processTNTArrow()
     }
 
-    // 使用延迟工厂注册原生 Item：构造器在注册窗口（已解冻的注册表）内执行，支持热重载
+    // 使用延迟工厂注册原生 Item：构造器在注册窗口（已解冻的注册表）内执行，支持热重�?
     registerNativeItem(
         id = "qwq:qwq",
         registerMode = RegisterMode.RELOADABLE,
         configure = {
             setName(Component.literal("Hello"))
             stacksTo(1)
-            setModel(Identifier.fromNamespaceAndPath("minecraft", "diamond"))
+            setModel(id("minecraft", "diamond"))
             food(FoodProperties.Builder().nutrition(1).saturationModifier(0.1f).build())
         }
     ) { it ->
-        // it 可直接作为 Item 构造参数（由 Katton 提供的 Item 属性封装）
+        // it 可直接作�?Item 构造参数（�?Katton 提供�?Item 属性封装）
         object : Item(it) {
             override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResult {
                 (player as? ServerPlayer)?.let { p -> tell(p , "Used the hello item!") }
@@ -106,7 +106,7 @@ fun main() {
 val tntArrow = HashSet<Arrow>()
 
 fun onArrowShot(player: ServerPlayer, arrow: Arrow) {
-    tell(player, Component.empty() + "你手持的武器是: " + player[KattonItemCollection.Weapon.MainHand]?.itemName)
+    tell(player, Component.empty() + "你手持的武器�? " + player[KattonItemCollection.Weapon.MainHand]?.itemName)
     //this arrow is shot by a tnt bow, make it explode
     if (player.mainHandItem.nbt["tnt"](false)) {
         tntArrow.add(arrow)

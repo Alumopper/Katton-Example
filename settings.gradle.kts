@@ -1,7 +1,9 @@
 pluginManagement {
 	repositories {
+		mavenLocal()
 		gradlePluginPortal()
 		mavenCentral()
+		maven("https://nexus.mcfpp.top/repository/maven-public/")
 	}
 }
 

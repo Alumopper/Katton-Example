@@ -1,8 +1,1 @@
-{
-    "id": "test",
-    "name": "Test Pack",
-    "version": "1.0.0",
-    "description": "Comprehensive test for Katton APIs",
-    "authors": ["Katton Dev"],
-    "enabled": true
-}
+{"id":"test","name":"Test Pack","version":"1.0.0","description":"Comprehensive test for Katton APIs","authors":["Katton Dev"],"enabled":true,"signature":{"algorithm":"Ed25519","keyId":"fabric-example","publicKey":"MCowBQYDK2VwAyEAjHNRgXOEC5eO5fYN4elac4L1xLeN/rSgaehl8e0GHs8=","signature":"rV79J9e8pb7TiBhx011p7GHi8Z2dWtk2H1Z5P2Ne8KqovMtZm9YL6idd+72qQpmKYtwN0bSs0/9gMco8q5IBCw=="}}
