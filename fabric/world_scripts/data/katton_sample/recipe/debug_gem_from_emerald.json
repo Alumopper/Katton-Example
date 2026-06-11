@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " E ",
+    "EAE",
+    " E "
+  ],
+  "key": {
+    "E": "minecraft:emerald",
+    "A": "minecraft:amethyst_shard"
+  },
+  "result": {
+    "id": "minecraft:diamond",
+    "count": 1
+  }
+}

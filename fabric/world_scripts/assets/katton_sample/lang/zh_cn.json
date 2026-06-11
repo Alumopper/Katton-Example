@@ -1,0 +1,8 @@
+{
+  "item.katton_sample.debug_wand": "Katton 调试法杖",
+  "item.katton_sample.debug_gem": "Katton 调试宝石",
+  "block.katton_sample.debug_block": "Katton 调试方块",
+  "advancement.katton_sample.root.title": "Katton 数据已加载",
+  "advancement.katton_sample.root.description": "一个从脚本包 data 目录加载的测试进度。",
+  "katton_sample.message.ping": "Katton 样例函数已执行。"
+}

@@ -1,0 +1,8 @@
+{
+  "item.katton_sample.debug_wand": "Katton Debug Wand",
+  "item.katton_sample.debug_gem": "Katton Debug Gem",
+  "block.katton_sample.debug_block": "Katton Debug Block",
+  "advancement.katton_sample.root.title": "Katton Data Loaded",
+  "advancement.katton_sample.root.description": "A test advancement loaded from a script-pack data folder.",
+  "katton_sample.message.ping": "Katton sample function executed."
+}

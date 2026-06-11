@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "katton_sample:block/debug_block"
+    }
+  }
+}

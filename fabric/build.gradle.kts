@@ -3,10 +3,10 @@ import java.nio.file.Path
 
 plugins {
 	id("org.jetbrains.kotlin.jvm") version "2.3.0"
-	id("top.katton.sign") version "0.3.0b6"
+	id("top.katton.sign") version "1.0.0"
 }
 
-val kattonVersion = "0.3.0b10"
+val kattonVersion = "0.3.0"
 val fabricApiVersion = "0.144.0+26.1"
 val worldScriptsTargetDir: List<File> = listOf(
 	file("G:\\AST\\katton\\fabric\\run\\saves\\新的世界\\kattonpacks\\test"),

@@ -4,28 +4,13 @@ import java.nio.file.Path
 plugins {
 	id("org.jetbrains.kotlin.jvm") version "2.3.0"
 	id("io.papermc.paperweight.userdev") version "2.0.0-beta.21"
-	id("top.katton.sign") version "0.3.0b6"
 }
 
-val kattonVersion = "0.3.0b3"
+val kattonVersion = "0.3.0"
 val worldScriptsTargetDir: List<File> = listOf(
 	file("G:\\AST\\kts4mc-template-1.21.11\\paper\\run\\world\\kattonpacks\\test")
 )
 val globalScriptsTargetDir: List<File> = listOf()
-
-tasks.named<top.katton.sign.GenerateKattonSigningKeyTask>("generateKattonSigningKey") {
-	privateKeyFile.convention(layout.buildDirectory.file("katton-signing-key.pem"))
-	publicKeyFile.convention(layout.buildDirectory.file("katton-signing-key.pub"))
-}
-
-tasks.named<top.katton.sign.KattonSignPackTask>("signKattonPack") {
-	dependsOn("generateKattonSigningKey")
-	packDir.convention(layout.projectDirectory.dir("world_scripts"))
-	privateKeyFile.convention(layout.buildDirectory.file("katton-signing-key.pem"))
-	publicKeyFile.convention(layout.buildDirectory.file("katton-signing-key.pub"))
-	scope.convention("world")
-	keyId.convention("paper-example")
-}
 
 repositories {
 	mavenLocal()
@@ -36,7 +21,7 @@ repositories {
 
 dependencies {
 	implementation("top.katton:katton-paper:$kattonVersion")
-	paperweight.paperDevBundle("26.1.2.build.+")
+	paperweight.paperDevBundle("26.1.2.build.69-stable")
 }
 
 
@@ -132,24 +117,4 @@ tasks.register("copyGameScripts") {
 	group = "distribution"
 	description = "Mirrors world_scripts and global_scripts contents to their configured target paths."
 	dependsOn("copyWorldScripts", "copyGlobalScripts")
-}
-
-tasks.named("copyWorldScripts") {
-	mustRunAfter("signKattonPack")
-}
-
-tasks.named("copyGameScripts") {
-	mustRunAfter("signKattonPack")
-}
-
-tasks.register("signAndCopyWorldScripts") {
-	group = "distribution"
-	description = "Signs world_scripts and mirrors them to the configured target path."
-	dependsOn("signKattonPack", "copyWorldScripts")
-}
-
-tasks.register("signAndCopyGameScripts") {
-	group = "distribution"
-	description = "Signs world_scripts, then mirrors world_scripts and global_scripts."
-	dependsOn("signKattonPack", "copyGameScripts")
 }

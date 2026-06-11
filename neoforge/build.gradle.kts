@@ -3,10 +3,10 @@ import java.nio.file.Path
 
 plugins {
 	id("org.jetbrains.kotlin.jvm") version "2.3.0"
-	id("top.katton.sign") version "0.3.0b6"
+	id("top.katton.sign") version "1.0.0"
 }
 
-val kattonVersion = "0.2.0"
+val kattonVersion = "0.3.0"
 val worldScriptsTargetDir: List<File> = listOf(
 	file("G:\\AST\\kts4mc-template-1.21.11\\neoforge\\run\\saves\\New World\\kattonpacks\\test"),
 	file("G:\\AST\\kts4mc-template-1.21.11\\neoforge\\run\\world\\kattonpacks\\test")
