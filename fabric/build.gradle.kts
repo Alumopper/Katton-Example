@@ -48,15 +48,6 @@ dependencies {
 	compileOnly("com.google.code.gson:gson:2.13.2")
 }
 
-sourceSets {
-	kotlin {
-		main {
-			kotlin.srcDir("global_scripts")
-				.srcDir("world_scripts")
-		}
-	}
-}
-
 kotlin {
 	jvmToolchain(25)
 	sourceSets.named("main") {
