@@ -24,7 +24,7 @@ import top.katton.paper.*
 private var testPlayer: ServerPlayer? = null
 private var running = false
 
-@ServerScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
 fun main() {
     val interval = config.getNumber("test_interval", 100).toLong()
     val targetName = config.getString("test_player", "")

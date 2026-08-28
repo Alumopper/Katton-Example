@@ -2,15 +2,35 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 plugins {
-	id("org.jetbrains.kotlin.jvm") version "2.3.0"
-	id("io.papermc.paperweight.userdev") version "2.0.0-beta.21"
+	id("org.jetbrains.kotlin.jvm")
+	id("io.papermc.paperweight.userdev")
+	id("top.katton.sign")
 }
 
-val kattonVersion = "0.3.0"
-val worldScriptsTargetDir: List<File> = listOf(
-	file("G:\\AST\\kts4mc-template-1.21.11\\paper\\run\\world\\kattonpacks\\test")
-)
-val globalScriptsTargetDir: List<File> = listOf()
+val kattonVersion = "0.4.0+mc26.1.2"
+fun configuredDirectories(propertyName: String): List<File> =
+	providers.gradleProperty(propertyName).orNull
+		?.split(File.pathSeparatorChar)
+		?.filter(String::isNotBlank)
+		?.map(::file)
+		.orEmpty()
+
+val worldScriptsTargetDir = configuredDirectories("kattonWorldScriptsDir")
+val globalScriptsTargetDir = configuredDirectories("kattonGlobalScriptsDir")
+
+tasks.named<top.katton.sign.GenerateKattonSigningKeyTask>("generateKattonSigningKey") {
+	privateKeyFile.convention(layout.buildDirectory.file("katton-signing-key.pem"))
+	publicKeyFile.convention(layout.buildDirectory.file("katton-signing-key.pub"))
+}
+
+tasks.named<top.katton.sign.KattonSignPackTask>("signKattonPack") {
+	dependsOn("generateKattonSigningKey")
+	packDir.convention(layout.projectDirectory.dir("world_scripts"))
+	privateKeyFile.convention(layout.buildDirectory.file("katton-signing-key.pem"))
+	publicKeyFile.convention(layout.buildDirectory.file("katton-signing-key.pub"))
+	scope.convention("world")
+	keyId.convention("paper-example")
+}
 
 repositories {
 	mavenLocal()
@@ -21,7 +41,7 @@ repositories {
 
 dependencies {
 	implementation("top.katton:katton-paper:$kattonVersion")
-	paperweight.paperDevBundle("26.1.2.build.69-stable")
+	paperweight.paperDevBundle("26.1.2.build.71-stable")
 }
 
 

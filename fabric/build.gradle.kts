@@ -2,17 +2,26 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 plugins {
-	id("org.jetbrains.kotlin.jvm") version "2.3.0"
-	id("top.katton.sign") version "1.0.0"
+	id("org.jetbrains.kotlin.jvm")
+	// Loom supplies the mapped Minecraft compile classpath.
+	// Source: https://docs.fabricmc.net/develop/loom/
+	id("net.fabricmc.fabric-loom")
+	id("top.katton.sign")
 }
 
-val kattonVersion = "0.3.0"
+val kattonVersion = "0.4.0+mc26.1.2"
+val minecraftVersion = "26.1.2"
+val fabricLoaderVersion = "0.18.4"
 val fabricApiVersion = "0.144.0+26.1"
-val worldScriptsTargetDir: List<File> = listOf(
-	file("G:\\AST\\katton\\fabric\\run\\saves\\新的世界\\kattonpacks\\test"),
-	file("G:\\AST\\katton\\fabric\\run\\world\\kattonpacks\\test")
-)
-val globalScriptsTargetDir: List<File> = listOf()
+fun configuredDirectories(propertyName: String): List<File> =
+	providers.gradleProperty(propertyName).orNull
+		?.split(File.pathSeparatorChar)
+		?.filter(String::isNotBlank)
+		?.map(::file)
+		.orEmpty()
+
+val worldScriptsTargetDir = configuredDirectories("kattonWorldScriptsDir")
+val globalScriptsTargetDir = configuredDirectories("kattonGlobalScriptsDir")
 
 tasks.named<top.katton.sign.GenerateKattonSigningKeyTask>("generateKattonSigningKey") {
 	privateKeyFile.convention(layout.buildDirectory.file("katton-signing-key.pem"))
@@ -37,12 +46,14 @@ repositories {
 }
 
 dependencies {
+	minecraft("com.mojang:minecraft:$minecraftVersion")
+	implementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
 	implementation("top.katton:katton-common:${kattonVersion}")
 	implementation("top.katton:katton-fabric:$kattonVersion")
 	compileOnly(fileTree("lib") {
 		include("*.jar")
 	})
-	compileOnly("net.fabricmc.fabric-api:fabric-api:$fabricApiVersion")
+	implementation("net.fabricmc.fabric-api:fabric-api:$fabricApiVersion")
 	compileOnly("com.mojang:brigadier:1.3.10")
 	compileOnly("org.joml:joml:1.10.8")
 	compileOnly("com.google.code.gson:gson:2.13.2")

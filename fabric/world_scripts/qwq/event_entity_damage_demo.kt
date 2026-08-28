@@ -6,13 +6,14 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import top.katton.api.ClientItemRenderEasing.EASE_IN_OUT_QUINT
 import top.katton.api.ClientItemRenderEasing.EASE_IN_QUINT
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.dpcaller.tell
 import top.katton.api.event.AllowDamageArg
 import top.katton.api.event.ServerLivingEntityEvent
 import top.katton.api.showItemRenderMarker
 
-@ServerScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
 fun eventEntityDamageDemo() {
     ServerLivingEntityEvent.onAllowDamage += allow@ fun(arg: AllowDamageArg): Boolean {
         val level = arg.entity.level()

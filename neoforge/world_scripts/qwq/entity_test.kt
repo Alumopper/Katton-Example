@@ -10,7 +10,9 @@ import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.entity.monster.Monster
 import net.minecraft.world.level.Level
 import qwq.Zombie1Entity
+import top.katton.api.ClientPhase
 import top.katton.api.ClientScriptEntrypoint
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.registry.registerAnimatedEntityRenderer
 import top.katton.api.registry.registerNativeEntity
@@ -46,8 +48,8 @@ class Zombie1Entity(type: EntityType<out Monster>, level: Level) : Monster(type,
 //  Registration
 // ═══════════════════════════════════════════════════════════
 
-@ServerScriptEntrypoint
-@ClientScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
+@ClientScriptEntrypoint(ClientPhase.REGISTRY_SETUP)
 fun initZombie() {
     registerNativeEntity("test:zombie1", RegisterMode.RELOADABLE,
         configure = {
@@ -60,7 +62,7 @@ fun initZombie() {
     }
 }
 
-@ClientScriptEntrypoint
+@ClientScriptEntrypoint(ClientPhase.REGISTRY_SETUP)
 fun initZombieRenderer() {
     registerAnimatedEntityRenderer(
         entityTypeId = "test:zombie1",

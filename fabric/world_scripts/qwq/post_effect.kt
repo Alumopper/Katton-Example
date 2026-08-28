@@ -1,5 +1,6 @@
 package qwq
 
+import top.katton.api.ClientPhase
 import top.katton.api.ClientScriptEntrypoint
 import top.katton.api.clearClientPostEffect
 import top.katton.api.clientTell
@@ -19,7 +20,7 @@ private const val PRESET_STUN = "qwq:post/stun_aberration"
 private const val PRESET_BLUR = "qwq:post/soft_blur"
 private const val CUSTOM_SCAN = "qwq:post/custom_scan"
 
-@ClientScriptEntrypoint
+@ClientScriptEntrypoint(ClientPhase.REGISTRY_SETUP)
 fun postEffectDemoMain() {
     runOnClient {
         // Vanilla/resource-pack backed effect. Reads:

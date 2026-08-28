@@ -14,7 +14,9 @@ import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
+import top.katton.api.ClientPhase
 import top.katton.api.ClientScriptEntrypoint
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.datapack.blockTags
 import top.katton.api.datapack.itemTags
@@ -33,8 +35,8 @@ import top.katton.api.registry.registerNativeItem
 import top.katton.registry.RegisterMode
 import top.katton.registry.id
 
-@ServerScriptEntrypoint
-@ClientScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
+@ClientScriptEntrypoint(ClientPhase.REGISTRY_SETUP)
 fun main() {
     // 示例：动态注册一个可热重载的方块
     registerNativeBlock(

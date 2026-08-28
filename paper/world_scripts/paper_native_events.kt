@@ -1,5 +1,6 @@
 @file:Suppress("unused")
 
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.event.managed.*
 import org.bukkit.event.block.*
@@ -8,7 +9,7 @@ import org.bukkit.event.block.*
 //  Paper Native Events Test
 // ═══════════════════════════════════════════════════════════════
 
-@ServerScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
 fun main() {
 
     // ─── Managed Event: 爆炸监听 ───

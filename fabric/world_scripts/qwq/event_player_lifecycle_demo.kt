@@ -1,12 +1,13 @@
 package qwq
 
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.dpcaller.tell
 import top.katton.api.event.PlayerArg
 import top.katton.api.event.ServerPlayerEvent
 import top.katton.api.once
 
-@ServerScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
 fun eventPlayerLifecycleDemo() {
     ServerPlayerEvent.onPlayerJoin += join@ fun(arg: PlayerArg) {
         val player = arg.player

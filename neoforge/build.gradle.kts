@@ -2,16 +2,27 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 plugins {
-	id("org.jetbrains.kotlin.jvm") version "2.3.0"
-	id("top.katton.sign") version "1.0.0"
+	id("org.jetbrains.kotlin.jvm")
+	// ModDevGradle supplies the NeoForge/Minecraft development artifacts.
+	// Source: https://github.com/neoforged/ModDevGradle#basic-usage-for-neoforge-mods
+	id("net.neoforged.moddev")
+	id("top.katton.sign")
 }
 
-val kattonVersion = "0.3.0"
-val worldScriptsTargetDir: List<File> = listOf(
-	file("G:\\AST\\kts4mc-template-1.21.11\\neoforge\\run\\saves\\New World\\kattonpacks\\test"),
-	file("G:\\AST\\kts4mc-template-1.21.11\\neoforge\\run\\world\\kattonpacks\\test")
-)
-val globalScriptsTargetDir: List<File> = listOf()
+val kattonVersion = "0.4.0+mc26.1.2"
+fun configuredDirectories(propertyName: String): List<File> =
+	providers.gradleProperty(propertyName).orNull
+		?.split(File.pathSeparatorChar)
+		?.filter(String::isNotBlank)
+		?.map(::file)
+		.orEmpty()
+
+val worldScriptsTargetDir = configuredDirectories("kattonWorldScriptsDir")
+val globalScriptsTargetDir = configuredDirectories("kattonGlobalScriptsDir")
+
+neoForge {
+	version = "26.1.2.30-beta"
+}
 
 tasks.named<top.katton.sign.GenerateKattonSigningKeyTask>("generateKattonSigningKey") {
 	privateKeyFile.convention(layout.buildDirectory.file("katton-signing-key.pem"))

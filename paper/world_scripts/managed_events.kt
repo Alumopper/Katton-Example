@@ -1,5 +1,6 @@
 @file:Suppress("unused")
 
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.event.*
 import top.katton.api.event.managed.*
@@ -15,7 +16,7 @@ import kotlin.compareTo
 //  Katton Managed Event Listener Test
 //  ═══════════════════════════════════════════════════════════════
 
-@ServerScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
 fun main() {
     // ─── 1. Katton 包装事件 ───
     ServerEvent.onServerStarted += { arg ->

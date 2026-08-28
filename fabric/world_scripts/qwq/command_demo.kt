@@ -6,10 +6,11 @@ import com.mojang.brigadier.arguments.StringArgumentType.getString
 import com.mojang.brigadier.arguments.StringArgumentType.word
 import net.minecraft.commands.SharedSuggestionProvider.suggest
 import net.minecraft.network.chat.Component
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.registry.registerCommand
 
-@ServerScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
 fun commandTest() {
     registerCommand("demo") {
         literal("ping") {

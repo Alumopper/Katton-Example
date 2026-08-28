@@ -6,7 +6,9 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.Rarity
 import net.minecraft.world.level.block.SoundType
+import top.katton.api.ClientPhase
 import top.katton.api.ClientScriptEntrypoint
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.mod.*
 
@@ -19,8 +21,8 @@ import top.katton.api.mod.*
  * Run `/katton reload` after editing to apply changes.
  */
 
-@ServerScriptEntrypoint
-@ClientScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
+@ClientScriptEntrypoint(ClientPhase.REGISTRY_SETUP)
 fun modifyTestMain() {
     tell("[ModifyTest] Loaded. Run /katton reload to apply modifications.")
 

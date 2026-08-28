@@ -1,5 +1,6 @@
 package qwq
 
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.datapack.FrameType
 import top.katton.api.datapack.advancements
@@ -8,7 +9,7 @@ import top.katton.api.datapack.recipes
 import top.katton.api.datapack.uniform
 import top.katton.api.mod.modifyRecipe
 
-@ServerScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
 fun test(){
     // Recipes — existing + new types
     recipes {

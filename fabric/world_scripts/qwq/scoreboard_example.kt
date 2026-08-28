@@ -1,10 +1,11 @@
 package qwq
 
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.dpcaller.getOrCreateObjective
 import top.katton.api.dpcaller.setScore
 
-@ServerScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
 fun scoreboardExampleMain(){
     //get the scoreboard objective
     val obj = getOrCreateObjective("myscore")

@@ -1,12 +1,13 @@
 package qwq
 
 import net.minecraft.server.level.ServerPlayer
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.dpcaller.tell
 import top.katton.api.event.AllowDamageArg
 import top.katton.api.event.ServerLivingEntityEvent
 
-@ServerScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
 fun eventEntityDamageDemo() {
     ServerLivingEntityEvent.onAllowDamage += allow@ fun(arg: AllowDamageArg): Boolean {
         val level = arg.entity.level()

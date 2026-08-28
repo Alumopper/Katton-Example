@@ -1,6 +1,7 @@
 package qwq
 
 import net.minecraft.network.chat.Component
+import top.katton.api.ServerPhase
 import top.katton.api.ServerScriptEntrypoint
 import top.katton.api.dpcaller.tell
 import top.katton.api.inject.*
@@ -19,7 +20,7 @@ private class UnsafeDemoTarget {
     fun multiplyTarget(a: Int, b: Int): Int = a * b
 }
 
-@ServerScriptEntrypoint
+@ServerScriptEntrypoint(ServerPhase.READY)
 fun unsafeDemo() {
     registerCommand("unsafe_demo") {
         literal("test") {

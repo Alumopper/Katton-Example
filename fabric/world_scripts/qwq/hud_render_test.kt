@@ -1,5 +1,6 @@
 package qwq
 
+import top.katton.api.ClientPhase
 import top.katton.api.ClientScriptEntrypoint
 import top.katton.api.HudRenderLayer
 import top.katton.api.clientFps
@@ -12,7 +13,7 @@ import top.katton.api.fillHudRect
 import top.katton.api.registerHudRenderer
 import top.katton.api.unregisterHudRenderer
 
-@ClientScriptEntrypoint
+@ClientScriptEntrypoint(ClientPhase.REGISTRY_SETUP)
 fun hudRenderTestMain() {
 
     unregisterHudRenderer("katton:test:hud")

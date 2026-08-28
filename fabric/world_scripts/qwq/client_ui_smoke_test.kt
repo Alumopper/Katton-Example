@@ -3,7 +3,7 @@ package qwq
 import net.minecraft.client.gui.components.toasts.SystemToast
 import top.katton.api.*
 
-@ClientScriptEntrypoint
+@ClientScriptEntrypoint(ClientPhase.JOINED)
 fun clientUiSmokeTestMain(){
     runOnClient {
         clientTell("[Katton] Client UI smoke test start")
